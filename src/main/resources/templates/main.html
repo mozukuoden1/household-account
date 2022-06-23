@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>main.html</title>
+</head>
+<body>
+<p>サンプル main.html</p>
+<table>
+		<tr>
+			<th>ID</th>
+			<th>日付</th>
+			<th>費目</th>
+			<th>メモ</th>
+			<th>収入</th>
+			<th>支出</th>
+		</tr>
+		<tr th:each="obj : ${datalist}">
+			<td th:text="${obj.id}"></td>
+			<td th:text="${obj.date}"></td>
+			<td th:text="${obj.categorydata.categoryname}"></td>
+			<td th:text="${obj.memo}"></td>
+			<td th:text="${obj.expense}"></td>
+			<td th:text="${obj.income}"></td>
+		</tr>
+</table>
+<a href="/regist">regist.html</a>
+<a href="/delete">delete.html</a>
+</body>
+</html>

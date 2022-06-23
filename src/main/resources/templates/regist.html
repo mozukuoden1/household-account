@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【家計管理プロジェクト】登録ページ</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body onLoad="selectDate()">
+	<div id="wrapper">
+		<!-- ヘッダー -->
+		<header class="header">
+			<div>
+				<h1 class="logo"><a href="index.html"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1>
+				<nav class="nav">
+					<ul>
+						<li><a href="regist.html">登録</a></li>
+						<li><a href="main.html">家計簿</a></li>
+						<li><a href="index.html">TOP</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<!-- ヘッダーここまで -->
+
+		<!-- メイン -->
+		<main>
+			<div class="kakei_touroku">
+				<h2>家計簿登録</h2>
+				<p id="errermessage"> </p>
+				<form action="/regist" method="post"><!-- onSubmit="createCookie()" -->
+					<table>
+						<tr>
+							<th>日付</th>
+							<td>
+								<input id="date" type="date" name="date">
+								<!--<select id="date_year" name="date_year"></select> 年　
+								<select id="date_month" name="date_month"></select> 月　
+								<select id="date_day" name="date_day"></select> 日-->
+
+								
+							</td>
+						</tr>
+						<tr>
+							<th>費目</th>
+							<td>
+								<select id="categoryId" name="categoryId">
+									<option value="1">給与</option>
+									<option value="2">住宅費</option>
+									<option value="3">食費</option>
+									<option value="4">日用品</option>
+									<option value="5">水道光熱費</option>
+									<option value="6">交際費</option>
+									<option value="7">その他</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>メモ</th>
+							<td>
+								<input type="text" name="memo">
+							</td>
+						</tr>
+						<tr>
+							<th>入金額</th>
+							<td>
+								<input id="income" type="number" name="income" value="0" min="0">
+							</td>
+						</tr>
+						<tr>
+							<th>出金額</th>
+							<td>
+								<input id="expense" type="number" name="expense" value="0" min="0">
+							</td>
+						</tr>
+					</table>
+
+
+
+					<div class="center">
+						<input id="regist" type="submit" value="　　登 録　　" class="btn">  <!--onClick="return inputCheck()" -->
+						<input id="reset" type="reset" value="リセット" class="btn reset">
+					</div>
+				</form>
+			</div>
+
+				<table class="kakei_t">
+
+					<tr>
+						<th>日付</th>
+						<th>費目</th>
+						<th>メモ</th>
+						<th>入金</th>
+						<th>出金</th>
+					</tr>
+				
+					<tr>
+						<td>2022-04-21</td>
+						<td>住宅費</td>
+						<td>4月の住宅費</td>
+						<td>0</td>
+						<td>100,000</td>
+					</tr>
+				</table>
+
+			<div class="btn_area"><a href="/main"><div class="page_btn">&#8810 家計簿メインに戻る</div></a></div>
+		</main>
+		<!-- メインここまで -->
+
+		<!-- フッター -->
+		<footer class="footer">
+			<p>&copy;Copyright kakeibokanri project. All rights reserved.</p>
+		</footer>
+		<!-- フッターここまで -->
+	</div>
+	<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>

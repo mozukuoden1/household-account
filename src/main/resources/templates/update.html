@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【家計管理プロジェクト】修正ページ</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<div id="smallwindow">
+		<!-- ヘッダー -->
+		<header class="header">
+			<div>
+				<h1 class="logo"><a href="index.jsp"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1>
+			</div>
+			<div class="close_btn"><button onClick="closebtn()">× 閉じる</button></div>
+		</header>
+		<!-- ヘッダーここまで -->
+
+		<!-- メイン -->
+		<main>
+			<div class="kakei_touroku">
+				<h2>家計簿修正</h2>
+				<p>修正したい家計簿のIDを入力し、「決定」ボタンを押した後<br>
+				修正してください</p>
+				<p id="errermessage"></p>
+				<form action="/selectid?action=update" method="post">
+					<table>
+						<tr>
+							<th>修正ID</th>
+							<td class="inputid">
+								<input id="selectUpdateId" type="text" name="id">　<input type="submit" value="決定">
+							</td>
+						</tr>
+					</table>
+				</form>
+				
+				<form action="/update" method="post">
+
+					<table th:if="${result} == null">
+						<tr>
+							<th>ID</th>
+							<td><input id="updateId" type="hidden" name="id"></td>
+						</tr>
+						<tr>
+							<th>日付</th>
+							<td>
+								<input id="date" type="date" name="date">
+							</td>
+						</tr>
+						<tr>
+							<th>費目</th>
+							<td>
+								<select id="categoryId" name="himoku">
+									<option value="1">給与</option>
+									<option value="2">家賃</option>
+									<option value="3">食費</option>
+									<option value="4">日用品</option>
+									<option value="5">水道光熱費</option>
+									<option value="6">交際費</option>
+									<option value="7">その他</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>メモ</th>
+							<td>
+								<input type="text" name="memo">
+							</td>
+						</tr>
+						<tr>
+							<th>入金額</th>
+							<td>
+								<input id="income" type="number" name="income" min="0"> <!-- 入出金がnullのレコードは登録できないのでnyukin,syukkinがnullの場合は考慮せず -->
+							</td>
+						</tr>
+						<tr>
+							<th>出金額</th>
+							<td>
+								<input id="expense" type="number" name="expense"  min="0">
+							</td>
+						</tr>
+					</table>
+					
+					<table th:if="${result} != null"><!-- resultの中身がない場合の処理、もっといい処理があるか探す -->
+						<tr>
+							<th>ID</th>
+							<td th:text="${result.id}"></td>
+							<td><input id="updateId" type="hidden" name="id" th:value="${result.id}"></td>
+						</tr>
+						<tr>
+							<th>日付</th>
+							<td>
+								<input id="date" type="date" name="date" th:value="${result.date}">
+							</td>
+						</tr>
+						<tr>
+							<th>費目</th>
+							<td>
+								<select id="categoryId" name="categoryId">
+									<option value="1" th:selected="${result.categoryId} == 1">給与</option>
+									<option value="2" th:selected="${result.categoryId} == 2">家賃</option>
+									<option value="3" th:selected="${result.categoryId} == 3">食費</option>
+									<option value="4" th:selected="${result.categoryId} == 4">日用品</option>
+									<option value="5" th:selected="${result.categoryId} == 5">水道光熱費</option>
+									<option value="6" th:selected="${result.categoryId} == 6">交際費</option>
+									<option value="7" th:selected="${result.categoryId} == 7">その他</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>メモ</th>
+							<td>
+								<input type="text" name="memo" th:value="${result.memo}">
+							</td>
+						</tr>
+						<tr>
+							<th>入金額</th>
+							<td>
+								<input id="income" type="number" name="income" th:value="${result.income}" min="0"> <!-- 入出金がnullのレコードは登録できないのでnyukin,syukkinがnullの場合は考慮せず -->
+							</td>
+						</tr>
+						<tr>
+							<th>出金額</th>
+							<td>
+								<input id="expense" type="number" name="expense" th:value="${result.expense}" min="0">
+							</td>
+						</tr>
+					</table>
+
+
+
+					<div class="center">
+						<input id="update" type="submit" value="　　修 正　　" class="btn" onClick="return inputCheck()">
+					</div>
+				</form>
+			</div>
+		</main>
+		<!-- メインここまで -->
+
+		<!-- フッター -->
+		<footer class="footer">
+			<p>&copy;Copyright kakeibokanri project. All rights reserved.</p>
+		</footer>
+		<!-- フッターここまで -->
+	</div>
+	<script type="text/javascript" src="js/script.js"></script>
+</body>
+</html>
