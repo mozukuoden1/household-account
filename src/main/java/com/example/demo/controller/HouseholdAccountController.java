@@ -107,7 +107,7 @@ public class HouseholdAccountController {
 		
 		HouseholdAccountData data = new HouseholdAccountData();
 		data.setDate("2022-06-22");
-		data.setExpense(100);
+		data.setExpense(0);
 		data.setMemo("ダミー");
 		data.setIncome(100);
 		data.setCategoryId(1);

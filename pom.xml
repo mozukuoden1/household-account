@@ -9,6 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
+
 	<artifactId>household-account</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>household-account</name>
@@ -36,6 +37,10 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+    		<groupId>org.thymeleaf.extras</groupId>
+   			 <artifactId>thymeleaf-extras-java8time</artifactId>
+ 		 </dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
