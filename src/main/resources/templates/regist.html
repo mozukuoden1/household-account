@@ -11,12 +11,12 @@
 		<!-- ヘッダー -->
 		<header class="header">
 			<div>
-				<h1 class="logo"><a href="index.html"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1>
+				<h1 class="logo"><a href="/index"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1>
 				<nav class="nav">
 					<ul>
-						<li><a href="regist.html">登録</a></li>
-						<li><a href="main.html">家計簿</a></li>
-						<li><a href="index.html">TOP</a></li>
+						<li><a href="/regist">登録</a></li>
+						<li><a href="/main">家計簿</a></li>
+						<li><a href="/index">TOP</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -33,12 +33,7 @@
 						<tr>
 							<th>日付</th>
 							<td>
-								<input id="date" type="date" name="date">
-								<!--<select id="date_year" name="date_year"></select> 年　
-								<select id="date_month" name="date_month"></select> 月　
-								<select id="date_day" name="date_day"></select> 日-->
-
-								
+								<input id="date" type="date" name="date">			
 							</td>
 						</tr>
 						<tr>
@@ -78,7 +73,7 @@
 
 
 					<div class="center">
-						<input id="regist" type="submit" value="　　登 録　　" class="btn">  <!--onClick="return inputCheck()" -->
+						<input id="regist" type="submit" value="　　登 録　　" class="btn" onClick="return inputCheck()"> 
 						<input id="reset" type="reset" value="リセット" class="btn reset">
 					</div>
 				</form>

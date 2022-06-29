@@ -11,7 +11,7 @@
 		<!-- ヘッダー -->
 		<header class="header">
 			<div>
-				<h1 class="logo"><a href="index.jsp"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1>
+				<h1 class="logo"><a href="/index"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1>
 			</div>
 			<div class="close_btn"><button onClick="closebtn()">× 閉じる</button></div>
 		</header>
@@ -23,7 +23,7 @@
 				<h2>家計簿削除</h2>
 				<p>修正したい家計簿のIDを入力し、「決定」ボタンを押した後<br>
 				削除項目を確認し、「削除」ボタンを押してください</p>
-				<p> ${errermessage}</p>
+				<p id="errermessage" th:text="${errermessage}"> </p>
 				<form action="/selectid?action=delete" method="post">
 					<table>
 						<tr>
@@ -35,10 +35,10 @@
 					</table>
 				</form>
 				
-					<form action="/delete" method="post"> <!-- onSubmit="return clickalert()" -->
+					<form action="/delete" method="post" th:if="${result} != null"> <!-- onSubmit="return clickalert()" -->
 						<table class="kakei_t" th:if="${result} != null">
 							<tr>
-								<th>ID</th><td><input type="hidden" name="id" th:value="${result.id}" th:text="${result.id}"></td>
+								<th>ID</th><td><input id="selectedId" type="hidden" name="id" th:value="${result.id}" th:text="${result.id}"></td>
 							</tr>
 							<tr>
 								<th>日付</th><td th:text="${result.date}"></td>
@@ -58,7 +58,7 @@
 						</table>
 
 						<div class="center">
-							<input type="submit" value="　　削 除　　" class="btn">
+							<input type="submit" value="　　削 除　　" class="btn" onClick="return inputCheck()">
 						</div>
 					</form>
 			</div>

@@ -16,22 +16,37 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.CategoryData;
 import com.example.demo.entity.HouseholdAccountData;
-import com.example.demo.repository.CategoryRepository;
-import com.example.demo.repository.HouseholdAccountRepository;
+import com.example.demo.service.HouseholdAccountService;
 
 @Controller
 public class HouseholdAccountController {
 	
 	@Autowired
-	HouseholdAccountRepository repository;
-	@Autowired
-	CategoryRepository categoryRepository;
+	HouseholdAccountService service;
+	
+	@RequestMapping(value = "/index")
+	public ModelAndView index(ModelAndView mav) {
+		System.out.println("index");
+		mav.setViewName("index");
+		return mav;
+	}
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public ModelAndView main(ModelAndView mav) {
-		//repository.findByDateBetween("20220620", "20220630");
-		List<HouseholdAccountData> list = repository.findAll();
+		List<HouseholdAccountData> list = service.carrentDate();
 		mav.addObject("datalist", list);
+		mav.addObject("datemessage", "今月のデータ");
+		System.out.println("main");
+		mav.setViewName("main");
+		return mav;
+	}
+	
+	@RequestMapping(value = "/main", method = RequestMethod.POST)
+	public ModelAndView main(@RequestParam("kikan_toshi") int year,@RequestParam("kikan_tsuki") int month, ModelAndView mav) {
+		
+		List<HouseholdAccountData> list = service.selectDate(year, month);
+		mav.addObject("datalist", list);
+		mav.addObject("datemessage", year + "年" + month + "月のデータ");
 		System.out.println("main");
 		mav.setViewName("main");
 		return mav;
@@ -39,7 +54,6 @@ public class HouseholdAccountController {
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
 	public ModelAndView regist(ModelAndView mav) {
-		//repository.findByDateBetween("20220620", "20220630");
 		System.out.println("regist:get");
 		mav.setViewName("regist");
 		return mav;
@@ -47,8 +61,7 @@ public class HouseholdAccountController {
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public ModelAndView regist(@ModelAttribute() HouseholdAccountData data, ModelAndView mav) {
-		//repository.findByDateBetween("20220620", "20220630");
-		repository.saveAndFlush(data);
+		service.saveAndFlush(data);
 		System.out.println("regist:post");
 		mav.setViewName("regist");
 		return mav;
@@ -56,17 +69,18 @@ public class HouseholdAccountController {
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public ModelAndView update(ModelAndView mav) {
-		System.out.println("regist:post");
+		System.out.println("update:get");
 		mav.setViewName("update");
 		return mav;
 	}
 	
 	@RequestMapping(value = "/selectid", method = RequestMethod.POST)
-	public ModelAndView selectid(@ModelAttribute() HouseholdAccountData data, @RequestParam(value = "action") String value, ModelAndView mav) {
-		Optional<HouseholdAccountData> result = repository.findById(data.getId());
+	public ModelAndView selectid(@ModelAttribute() HouseholdAccountData data, @RequestParam("action") String value, ModelAndView mav) {
+		Optional<HouseholdAccountData> result = service.findById(data, value);
 		System.out.println("selectid");
-		mav.addObject("result", result.get());
 		System.out.println(value);
+		mav.addObject("result", result.get());
+		System.out.println("action:" + value);
 		mav.setViewName(value);
 		return mav;
 	}
@@ -75,7 +89,7 @@ public class HouseholdAccountController {
 	@Transactional
 	public ModelAndView update(@ModelAttribute() HouseholdAccountData data, ModelAndView mav) {
 		System.out.println("update");
-		repository.saveAndFlush(data);
+		service.saveAndFlush(data);
 		mav.setViewName("update");
 		return mav;
 	}
@@ -90,8 +104,7 @@ public class HouseholdAccountController {
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public ModelAndView delete(@ModelAttribute() HouseholdAccountData data,ModelAndView mav) {
 		System.out.println("delete:post");
-		System.out.println(data);
-		repository.deleteById(data.getId());
+		service.deleteById(data);
 		mav.setViewName("delete");
 		return mav;
 	}
@@ -102,7 +115,7 @@ public class HouseholdAccountController {
 		for(int i = 0; i < categoryes.length;i++) {
 			categoryDatas[i] = new CategoryData();
 			categoryDatas[i].setCategoryname(categoryes[i]);
-			categoryRepository.saveAndFlush(categoryDatas[i]);
+			service.saveAndFlush(categoryDatas[i]);
 		}
 		
 		HouseholdAccountData data = new HouseholdAccountData();
@@ -111,7 +124,7 @@ public class HouseholdAccountController {
 		data.setMemo("ダミー");
 		data.setIncome(100);
 		data.setCategoryId(1);
-		repository.saveAndFlush(data);
+		service.saveAndFlush(data);
 		
 		/*categoryData2.setHouseholdAccountData(Arrays.asList(data));
 		categoryRepository.saveAndFlush(categoryData2);*/
@@ -122,7 +135,7 @@ public class HouseholdAccountController {
 		data2.setMemo("ダミー22");
 		data2.setExpense(100);
 		data2.setCategoryId(7);
-		repository.saveAndFlush(data2);
+		service.saveAndFlush(data2);
 
 	}
 }

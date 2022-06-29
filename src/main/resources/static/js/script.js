@@ -15,10 +15,10 @@ function clickalert() {
 
 // サブウィンドウ
 function subwin_up() {
-	window.open("Update.jsp","修正ページ","width=600,height=700,top=0,left=0");
+	window.open("/update","修正ページ","width=600,height=700,top=0,left=0");
 }
 function subwin_del() {
-	window.open("Delete.jsp","修正ページ","width=600,height=700,top=0,left=0");
+	window.open("/delete","修正ページ","width=600,height=700,top=0,left=0");
 }
 function closebtn() {
 	window.close();
@@ -90,23 +90,23 @@ const inputCheck = () => {
 	let errermessage = document.getElementById("errermessage")
 	errermessage.innerHTML = '';
 
-	if(document.body.contains(document.getElementById("updateId"))) {
-		const updateId =document.getElementById("updateId").value;
+	if(document.body.contains(document.getElementById("selectedId"))) {
+		const selectedId =document.getElementById("selectedId").value;
 
-		if(updateId === null || updateId ==='') {
-			errermessage.insertAdjacentHTML('beforeend','エラー：修正IDを入力してください。');
+		if(selectedId === null || selectedId ==='') {
+			errermessage.insertAdjacentHTML('beforeend','エラー：IDを入力してください。');
 			return false;
 		}
 	}
 
-	let nyukin = document.getElementById("nyukin").value;
-	let syukkin = document.getElementById("syukkin").value;
+	let income = document.getElementById("income").value;
+	let expense = document.getElementById("expense").value;
 
-	if(nyukin > 0 && syukkin > 0) {
+	if(income > 0 && expense > 0) {
 		errermessage.insertAdjacentHTML('beforeend','エラー：入出金額の項目がどちらも1以上のデータは登録できません。');
 		return false;
 	}
-	if(nyukin == 0 && syukkin == 0) {
+	if(income == 0 && expense == 0) {
 		errermessage.insertAdjacentHTML('beforeend', 'エラー：入出金額の項目がどちらも0のデータは登録できません。');
 		return false;
 	}

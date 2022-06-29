@@ -2,29 +2,73 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>main.html</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【家計管理プロジェクト】メインページ</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-<p>サンプル main.html</p>
-<table>
-		<tr>
-			<th>ID</th>
-			<th>日付</th>
-			<th>費目</th>
-			<th>メモ</th>
-			<th>収入</th>
-			<th>支出</th>
-		</tr>
-		<tr th:each="obj : ${datalist}">
-			<td th:text="${obj.id}"></td>
-			<td th:text="${obj.date}"></td>
-			<td th:text="${obj.categorydata.categoryname}"></td>
-			<td th:text="${obj.memo}"></td>
-			<td th:text="${obj.expense}"></td>
-			<td th:text="${obj.income}"></td>
-		</tr>
-</table>
-<a href="/regist">regist.html</a>
-<a href="/delete">delete.html</a>
+<body onload="setSelectDate()">
+	<div id="wrapper">
+		<!-- ヘッダー -->
+		<header class="header">
+			<div>
+				<h1 class="logo"><a href="/index"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1>
+				<nav class="nav">
+					<ul>
+						<li><a href="/regist">登録</a></li>
+						<li><a href="/main">家計簿</a></li>
+						<li><a href="/index">TOP</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<!-- ヘッダーここまで -->
+
+		<!-- メイン -->
+		<main>
+			<h2>家計簿</h2>
+			<p th:text="${datemessage}"></p>
+			<form action="/main" method="post" class="shiborikomi">
+				<select name="kikan_toshi" id="kikan_toshi"></select>
+				<select name="kikan_tsuki" id="kikan_tsuki"></select>
+				<input type="submit" value="絞り込み">
+			</form>
+
+			<table class="kakei_t">
+				<tr>
+					<th>ID</th>
+					<th>日付</th>
+					<th>費目</th>
+					<th>メモ</th>
+					<th>入金</th>
+					<th>出金</th>
+				</tr>
+				<tr th:each="obj : ${datalist}">
+					<td th:text="${obj.id}"></td>
+					<td th:text="${obj.date}"></td>
+					<td th:text="${obj.categorydata.categoryname}"></td>
+					<td th:text="${obj.memo}"></td>
+					<td th:text="${obj.expense}"></td>
+					<td th:text="${obj.income}"></td>
+				</tr>
+			</table>
+			<div class="zansaka"><span>残高</span> </div>
+
+			<div class="btn_area">
+				<a href="/regist"><div class="page_btn">　登 録　 &#8811</div></a>
+				<a href="javascript:subwin_up();"><div class="page_btn">修 正 &#8811</div></a>
+				<a href="javascript:subwin_del();"><div class="page_btn">削 除 &#8811</div></a>
+			</div>
+
+		</main>
+		<!-- メインここまで -->
+
+		<!-- フッター -->
+		<footer class="footer">
+			<p>&copy;Copyright kakeibokanri project. All rights reserved.</p>
+            <a href="#wrapper" id="topbtn">&#8613</a>
+		</footer>
+		<!-- フッターここまで -->
+	</div>
+	<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
