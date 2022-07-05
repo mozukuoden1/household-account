@@ -12,6 +12,9 @@
 		<header class="header">
 			<div>
 				<h1 class="logo"><a href="/index"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1>
+				<form th:action="@{/logout}" method="post"onSubmit="return logoutalert()">
+					<input class="logout" type="submit" value="ログアウト">
+				</form>
 				<nav class="nav">
 					<ul>
 						<li><a href="/regist">登録</a></li>
@@ -28,7 +31,7 @@
 			<div class="kakei_touroku">
 				<h2>家計簿登録</h2>
 				<p id="errermessage"> </p>
-				<form action="/regist" method="post"><!-- onSubmit="createCookie()" -->
+				<form th:action="@{/regist}" method="post"><!-- onSubmit="createCookie()" -->
 					<table>
 						<tr>
 							<th>日付</th>
@@ -41,7 +44,7 @@
 							<td>
 								<select id="categoryId" name="categoryId">
 									<option value="1">給与</option>
-									<option value="2">住宅費</option>
+									<option value="2">家賃</option>
 									<option value="3">食費</option>
 									<option value="4">日用品</option>
 									<option value="5">水道光熱費</option>
@@ -57,13 +60,13 @@
 							</td>
 						</tr>
 						<tr>
-							<th>入金額</th>
+							<th>収入</th>
 							<td>
 								<input id="income" type="number" name="income" value="0" min="0">
 							</td>
 						</tr>
 						<tr>
-							<th>出金額</th>
+							<th>支出</th>
 							<td>
 								<input id="expense" type="number" name="expense" value="0" min="0">
 							</td>
@@ -85,8 +88,8 @@
 						<th>日付</th>
 						<th>費目</th>
 						<th>メモ</th>
-						<th>入金</th>
-						<th>出金</th>
+						<th>収入</th>
+						<th>支出</th>
 					</tr>
 				
 					<tr>

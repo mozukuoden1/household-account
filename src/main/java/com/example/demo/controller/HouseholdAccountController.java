@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,22 +15,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.entity.Authorities;
 import com.example.demo.entity.CategoryData;
 import com.example.demo.entity.HouseholdAccountData;
+import com.example.demo.entity.UserData;
 import com.example.demo.service.HouseholdAccountService;
+import com.example.demo.service.UserService;
 
 @Controller
 public class HouseholdAccountController {
 	
 	@Autowired
 	HouseholdAccountService service;
+	@Autowired
+	UserService userService;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
-	@RequestMapping(value = "/index")
+	/*@RequestMapping(value = "/index")
 	public ModelAndView index(ModelAndView mav) {
 		System.out.println("index");
 		mav.setViewName("index");
 		return mav;
-	}
+	}*/
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public ModelAndView main(ModelAndView mav) {
@@ -46,6 +54,8 @@ public class HouseholdAccountController {
 		
 		List<HouseholdAccountData> list = service.selectDate(year, month);
 		mav.addObject("datalist", list);
+		mav.addObject("year", year);
+		mav.addObject("month", month);
 		mav.addObject("datemessage", year + "年" + month + "月のデータ");
 		System.out.println("main");
 		mav.setViewName("main");
@@ -136,6 +146,19 @@ public class HouseholdAccountController {
 		data2.setExpense(100);
 		data2.setCategoryId(7);
 		service.saveAndFlush(data2);
-
+		
+		UserData user = new UserData();
+		user.setUsername("user1");
+		user.setPassword(passwordEncoder.encode("password1"));
+		user.setEnable(true);
+		userService.saveAndFlush(user);
+		
+		Authorities auth = new Authorities();
+		auth.setUsername("user1");
+		auth.setAuthority("ROLE_USER");
+		auth.setUserdata(user);
+		userService.saveAndFlush(auth);
+		/*user.setAuthorities(auth);
+		userService.saveAndFlush(user);*/
 	}
 }

@@ -12,6 +12,10 @@ function clickalert() {
 	}
 }
 
+const logoutalert = () => {
+	let result = window.confirm('ログアウトしてもよろしいですか？');
+	return result;
+}
 
 // サブウィンドウ
 function subwin_up() {
@@ -59,28 +63,43 @@ const getCookieValue = (elem) => {
 	return value;
 }
 
+
+
+
+
 const setSelectDate = () => {
-	//Main.jsp 期間絞り込みselect生成
+	//main.html 期間絞り込みselect生成
 	let year = document.getElementById("kikan_toshi");
 	let month = document.getElementById("kikan_tsuki");
 	const date = new Date();
 	const thisYear = date.getFullYear();
+	
 
 	for (let i = 2020; i <= thisYear; i++) {
 		let option = document.createElement("option");
 		option.setAttribute("value", i);
 		option.innerHTML = i + "年";
 		year.appendChild(option);
-		if(option.value == thisYear) {
+		
+		if(selectyear != null) {
+			if(selectyear == option.value) {
+				option.setAttribute("selected", true);
+			}
+		} else if(option.value == thisYear) {
 			option.setAttribute("selected", true);
 		}
 	}
+	
 	for (let i = 1; i <= 12; i++) {
 		let option = document.createElement("option");
 		option.setAttribute("value", ("0" + i).slice(-2));
 		option.innerHTML = i + "月";
 		month.appendChild(option);
-		if(option.value ==  date.getMonth() + 1) {
+		if(selectmonth != null) {
+			if(selectmonth == option.value) {
+				option.setAttribute("selected", true);
+			}
+		} else if(option.value ==  date.getMonth() + 1) {
 			option.setAttribute("selected", true);
 		}
 	}
@@ -113,126 +132,14 @@ const inputCheck = () => {
 }
 const selectDate = () => {
 	let date = new Date();
-	console.log(date);
 	let year = date.getFullYear().toString();
 	let monthvalue = date.getMonth() + 1;
 	let month = monthvalue.toString();
-	console.log(date);
 	month = month.length < 2? "0" + month : month
 	
 	let day = date.getDate().toString();
 	day = day.length < 2? "0" + day : day
 	date = year + "-" + month + "-" + day; 
-	console.log(date);
 	document.getElementById("date").value = date;
 }
-(function() {
-	/*
-	 * 任意の年でうるう年があるかをチェック
-	 * @param{number}チェックしたい西暦年号
-	 * @return{boolean}うるう年であるかを示す真偽値
-	 */
-		const isLeapYear = date_year =>(date_year % 4 === 0) && (date_year % 100 !== 0) || (date_year % 400 === 0);
 
-	/*
-	 * 任意の年の２月の日数を数える
-	 * @param{number}チェックしたい西暦年号
-	 * @return{boolean}その年の2月の日数
-	 */
-		const countDatesOfFeb = date_year => isLeapYear(date_year) ? 29 : 28;
-
-	/*
-	 * セレクトボックスの中にオプションを生成する
-	 * @param{string}セレクトボックスのDOMのid属性値
-	 * @param{number}オプションを生成する最初の数値
-	 * @param{number}オプションを生成する最後の数値
-	 * @param{number}現在の日数にマッチする数値
-	 */
-
-		const createOption = (id, startNum, endNum, current) => {
-			let selectdate = document.getElementById(id);
-			const selectDom = document.getElementById(id);
-			let optionDom = '';
-			for (let i = startNum; i <= endNum; i++) {
-				if (i == current) {
-					option = '<option value="' + i + '" selected>' + i + '</option>';
-				} else {
-					option = '<option value="' + i + '">' + i + '</option>';
-				}
-				optionDom += option;
-			}
-			selectDom.insertAdjacentHTML('beforeend', optionDom);
-		}
-
-
-		// DOM
-		const yearBox = document.getElementById('date_year');
-		const monthBox = document.getElementById('date_month');
-		const dateBox = document.getElementById('date_day');
-		const reset = document.getElementById('reset');
-		const selectUpdateId = document.getElementById('selectUpdateId');
-
-		// 日付データ
-		const today = new Date();
-		const thisYear = today.getFullYear();
-		const thisMonth = today.getMonth() + 1;
-		const thisDate = today.getDate();
-
-		let datesOfYear = [31, countDatesOfFeb(thisYear), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-		// イベント
-		monthBox.addEventListener('change', (e)=> {
-			dateBox.innerHTML = '';
-			let selectedMonth = e.target.value;
-			if(selectedMonth.search('[1-9]') !== -1) {
-				while(selectedMonth.match('[a-z]', '[A-Z]') !== null) {
-					selectedMonth = selectedMonth.substring(1);
-					if(selectedMonth.startsWith('0')) {
-						selectedMonth = selectedMonth.substring(1);
-					}
-				}
-			}
-			datesOfYear = [31, countDatesOfFeb(thisYear), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-			createOption('date_day', 1, datesOfYear[selectedMonth - 1], 1);
-		});
-
-		yearBox.addEventListener('change', e => {
-			monthBox.innerHTML = '';
-			dateBox.innerHTML = '';
-			const updatedYear = e.target.value;
-			datesOfYear = [31, countDatesOfFeb(updatedYear), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
-			createOption('date_month', 1, 12, 1);
-			createOption('date_day', 1, datesOfYear[0], 1);
-		});
-
-		reset.addEventListener('click', e => {
-			resetCookie();
-
-			yearBox.innerHTML = '';
-			monthBox.innerHTML = '';
-			dateBox.innerHTML = '';
-
-			createOption('date_year', 2020, thisYear, thisYear);
-			createOption('date_month', 1, 12, thisMonth);
-			createOption('date_day', 1, datesOfYear[thisMonth - 1], thisDate);
-		});
-
-		// ロード時
-		if(document.cookie.length > 0) {
-
-			let date = {};
-			date.year = getCookieValue('year');
-			date.month = getCookieValue('month');
-			date.day = getCookieValue('day');
-
-			createOption('date_year', 2020, thisYear, date.year);
-			createOption('date_month', 1, 12, date.month);
-			createOption('date_day', 1, datesOfYear[thisMonth - 1], date.day);
-
-		} else {
-			createOption('date_year', 2020, thisYear, thisYear);
-			createOption('date_month', 1, 12, thisMonth);
-			createOption('date_day', 1, datesOfYear[thisMonth - 1], thisDate);
-		}
-	}());
