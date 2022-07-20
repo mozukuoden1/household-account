@@ -28,6 +28,9 @@ function closebtn() {
 	window.close();
 }
 
+
+	
+
 const resetCookie = () => {
 
 	const dates = ['year=', 'month=', 'day='];
@@ -104,7 +107,14 @@ const setSelectDate = () => {
 		}
 	}
 }
-
+const test = () => {
+	
+		console.log("通信");
+			fetch('/test', {　 // 送信先URL
+	   	 method: 'get'// 通信メソッド
+	    
+	});
+}
 const inputCheck = () => {
 	let errermessage = document.getElementById("errermessage")
 	errermessage.innerHTML = '';

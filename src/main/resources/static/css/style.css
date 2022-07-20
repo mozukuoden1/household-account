@@ -17,6 +17,9 @@ body {
 	margin: 0;
 	background-color: #eeece9;
 }
+.err {
+	color: #ff0000;
+}
 main {
 	padding:30px;
 	margin: 0 auto 20px;
@@ -250,19 +253,19 @@ input[type="password" i] {
 	content: "-";
 }
 /* （Regist.jspのテーブル） */
-#wrapper .kakei_touroku + .kakei_t td:nth-child(4) {
+#wrapper .kakei_touroku + .kakei_t td:nth-child(5) {
 	color: green;
 }
-#wrapper .kakei_touroku + .kakei_t td:nth-child(4):before {
+#wrapper .kakei_touroku + .kakei_t td:nth-child(5):before {
 	content: "+";
 }
-#wrapper .kakei_touroku + .kakei_t td:nth-child(4):after {
+#wrapper .kakei_touroku + .kakei_t td:nth-child(5):after {
 	content: none;
 }
-#wrapper .kakei_touroku + .kakei_t td:nth-child(5) {
+#wrapper .kakei_touroku + .kakei_t td:nth-child(6) {
 	color: red;
 }
-#wrapper .kakei_touroku + .kakei_t td:nth-child(5):before {
+#wrapper .kakei_touroku + .kakei_t td:nth-child(6):before {
 	content: "-";
 }
 
@@ -287,6 +290,13 @@ input[type="password" i] {
 	display:block;
 	float:left;
 	margin-top:10px;
+}
+.zansaka p {
+	font-size: 18px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-bottom: auto;
 }
 
 

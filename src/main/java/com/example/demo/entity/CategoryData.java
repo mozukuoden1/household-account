@@ -10,15 +10,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class CategoryData {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
+	@Column(name = "category_id")
 	private int categoryId;
 	@Column
 	private String categoryname;
+	@JsonIgnore
 	@OneToMany(mappedBy = "categorydata", cascade = CascadeType.ALL)
 	List<HouseholdAccountData> householdAccountData;
 	

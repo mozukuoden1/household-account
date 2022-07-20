@@ -42,21 +42,30 @@ public class HouseholdAccountController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public ModelAndView main(ModelAndView mav) {
 		List<HouseholdAccountData> list = service.carrentDate();
+		List<Integer> sumIncome = service.sumIncome();
+		List<Integer> sumExpence = service.sumExpence();
+		
 		mav.addObject("datalist", list);
-		mav.addObject("datemessage", "今月のデータ");
+		mav.addObject("sumIncome", sumIncome);
+		mav.addObject("sumExpence", sumExpence);
+		mav.addObject("dateMessage", "今月のデータ");
 		System.out.println("main");
 		mav.setViewName("main");
 		return mav;
 	}
 	
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
-	public ModelAndView main(@RequestParam("kikan_toshi") int year,@RequestParam("kikan_tsuki") int month, ModelAndView mav) {
-		
+	public ModelAndView main(@RequestParam("kikan_toshi") int year,@RequestParam("kikan_tsuki") int month, ModelAndView mav) {		
 		List<HouseholdAccountData> list = service.selectDate(year, month);
+		List<Integer> sumIncome = service.sumIncome(year, month);
+		List<Integer> sumExpence = service.sumExpence(year, month);
+		
 		mav.addObject("datalist", list);
+		mav.addObject("sumIncome", sumIncome);
+		mav.addObject("sumExpence", sumExpence);
 		mav.addObject("year", year);
 		mav.addObject("month", month);
-		mav.addObject("datemessage", year + "年" + month + "月のデータ");
+		mav.addObject("dateMessage", year + "年" + month + "月のデータ");
 		System.out.println("main");
 		mav.setViewName("main");
 		return mav;
@@ -72,7 +81,12 @@ public class HouseholdAccountController {
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public ModelAndView regist(@ModelAttribute() HouseholdAccountData data, ModelAndView mav) {
 		service.saveAndFlush(data);
+		Optional<HouseholdAccountData> result = service.findById(data);
+		CategoryData cate = service.findByCategoryname(data.getCategoryId());
 		System.out.println("regist:post");
+		
+		mav.addObject("registdata", result.get());
+		mav.addObject("registCategoryname", cate.getCategoryname());
 		mav.setViewName("regist");
 		return mav;
 	}
@@ -86,7 +100,7 @@ public class HouseholdAccountController {
 	
 	@RequestMapping(value = "/selectid", method = RequestMethod.POST)
 	public ModelAndView selectid(@ModelAttribute() HouseholdAccountData data, @RequestParam("action") String value, ModelAndView mav) {
-		Optional<HouseholdAccountData> result = service.findById(data, value);
+		Optional<HouseholdAccountData> result = service.findById(data);
 		System.out.println("selectid");
 		System.out.println(value);
 		mav.addObject("result", result.get());
@@ -120,15 +134,17 @@ public class HouseholdAccountController {
 	}
 	@PostConstruct
 	public void init() {
-		String[] categoryes = {"給与", "家賃", "食費", "日用品", "水道光熱費", "交際費", "その他"};
+		/*String[] categoryes = {"給与", "家賃", "食費", "日用品", "水道光熱費", "交際費", "その他"};
 		CategoryData[] categoryDatas = new CategoryData[categoryes.length];
 		for(int i = 0; i < categoryes.length;i++) {
 			categoryDatas[i] = new CategoryData();
+			categoryDatas[i].setCategoryId(i + 1);			
 			categoryDatas[i].setCategoryname(categoryes[i]);
 			service.saveAndFlush(categoryDatas[i]);
-		}
+		}*/
 		
 		HouseholdAccountData data = new HouseholdAccountData();
+		data.setId(1);
 		data.setDate("2022-06-22");
 		data.setExpense(0);
 		data.setMemo("ダミー");
@@ -140,6 +156,7 @@ public class HouseholdAccountController {
 		categoryRepository.saveAndFlush(categoryData2);*/
 		
 		HouseholdAccountData data2 = new HouseholdAccountData();
+		data2.setId(2);
 		data2.setDate("2022-06-23");
 		data2.setIncome(100);
 		data2.setMemo("ダミー22");
@@ -148,13 +165,13 @@ public class HouseholdAccountController {
 		service.saveAndFlush(data2);
 		
 		UserData user = new UserData();
-		user.setUsername("user1");
-		user.setPassword(passwordEncoder.encode("password1"));
+		user.setUsername("root");
+		user.setPassword(passwordEncoder.encode("root"));
 		user.setEnable(true);
 		userService.saveAndFlush(user);
 		
 		Authorities auth = new Authorities();
-		auth.setUsername("user1");
+		auth.setUsername("root");
 		auth.setAuthority("ROLE_USER");
 		auth.setUserdata(user);
 		userService.saveAndFlush(auth);

@@ -18,7 +18,7 @@ public class HouseholdAccountData {
 	private int id;
 	@Column
 	private String date;
-	@Column
+	@Column(name = "category_id")
 	private int categoryId;
 	@Column
 	private String memo;
@@ -27,7 +27,7 @@ public class HouseholdAccountData {
 	@Column
 	private int expense;	
 	@ManyToOne
-	@JoinColumn(name = "categoryId", referencedColumnName = "categoryId", insertable = false, updatable = false)
+	@JoinColumn(name = "category_id", referencedColumnName = "category_id", insertable = false, updatable = false)
 	CategoryData categorydata;
 	
 	

@@ -6,6 +6,7 @@
 <title>【家計管理プロジェクト】メインページ</title>
 <link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script th:inline="javascript">
 			const selectyear = /*[[${year}]]*/"year";
 			const selectmonth = /*[[${month}]]*/"month";
@@ -34,9 +35,9 @@
 		<!-- メイン -->
 		<main>
 			<h2>家計簿</h2>
-			<p th:text="${datemessage}"></p>
+			<p th:text="${dateMessage}"></p>
 			<form th:action="@{/main}" method="post" class="shiborikomi">
-				<select name="kikan_toshi" id="kikan_toshi"></select>
+				<select name="kikan_toshi" id="kikan_toshi" onchange="test()"></select>
 				<select name="kikan_tsuki" id="kikan_tsuki"></select>
 				<input type="submit" value="絞り込み">
 			</form>
@@ -59,8 +60,14 @@
 					<td th:text="${obj.expense}"></td>
 				</tr>
 			</table>
-			<div class="zansaka"><span>残高</span> </div>
-
+			<div class="zansaka"><span>支出</span> 
+				<p th:text="${sumExpence.get(0)}"></p>
+			</div>
+			<div class="zansaka"><span>収入</span> 
+				<p th:text="${sumIncome.get(0)}"></p>
+			</div>
+			
+			
 			<div class="btn_area">
 				<a href="/regist"><div class="page_btn">　登 録　 &#8811</div></a>
 				<a href="javascript:subwin_up();"><div class="page_btn">修 正 &#8811</div></a>

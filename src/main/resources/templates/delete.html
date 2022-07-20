@@ -23,7 +23,7 @@
 				<h2>家計簿削除</h2>
 				<p>修正したい家計簿のIDを入力し、「決定」ボタンを押した後<br>
 				削除項目を確認し、「削除」ボタンを押してください</p>
-				<p id="errermessage" th:text="${errermessage}"> </p>
+				<p class="err" id="errermessage" th:text="${errermessage}"> </p>
 				<form th:action="@{/selectid?action=delete}" method="post">
 					<table>
 						<tr>

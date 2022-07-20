@@ -30,7 +30,7 @@
 		<main>
 			<div class="kakei_touroku">
 				<h2>家計簿登録</h2>
-				<p id="errermessage"> </p>
+				<p class="err" id="errermessage"> </p>
 				<form th:action="@{/regist}" method="post"><!-- onSubmit="createCookie()" -->
 					<table>
 						<tr>
@@ -81,10 +81,14 @@
 					</div>
 				</form>
 			</div>
-
+			<form action="/test" method="POST">
+				<input type="text" name="test">
+				<input type="submit" value="決定">
+			</form>
 				<table class="kakei_t">
 
 					<tr>
+						<th>I D</th>
 						<th>日付</th>
 						<th>費目</th>
 						<th>メモ</th>
@@ -92,12 +96,13 @@
 						<th>支出</th>
 					</tr>
 				
-					<tr>
-						<td>2022-04-21</td>
-						<td>住宅費</td>
-						<td>4月の住宅費</td>
-						<td>0</td>
-						<td>100,000</td>
+					<tr th:if="${registdata} != null" th:object="${registdata}">
+						<td th:text="*{id}">2022-04-21</td>
+						<td th:text="*{date}">2022-04-21</td>
+						<td th:text="${registCategoryname}">住宅費</td>
+						<td th:text="*{memo}">4月の住宅費</td>
+						<td th:text="*{income}">0</td>
+						<td th:text="*{expense}">100,000</td>
 					</tr>
 				</table>
 

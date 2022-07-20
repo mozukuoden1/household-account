@@ -13,6 +13,7 @@
 		<header class="header">
 			<div>
 				<h1 class="logo"><a href="/index"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1>
+				<p>ログインユーザー</p>
 				<form th:action="@{/logout}" method="post"onSubmit="return logoutalert()">
 						<input class="logout" type="submit" value="ログアウト">
 				</form>
@@ -26,12 +27,12 @@
 					<p th:if="${loginUserName == null}">ログインしてください</p>
 					<p th:if="${loginUserName}" th:text="'ようこそ' + ${loginUserName} + '様'"></p>
 					<div th:if="${param.error}">
-			            エラー：ログインに失敗しました
-			            <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
+			            <p class="err">エラー：ログインに失敗しました</p>
+			            <div class="err" th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
 			                <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"></span>
 			            </div>
 			        </div>
-			        <div th:if="${param.logout}">
+			        <div th:if="${param.logout}" th:text="${param.logout}">
 			            ログアウトしました
 			        </div>
 					<form th:action="@{/index}" method="post" th:if="${loginUserName == null}">

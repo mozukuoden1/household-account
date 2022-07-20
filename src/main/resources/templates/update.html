@@ -23,7 +23,7 @@
 				<h2>家計簿修正</h2>
 				<p>修正したい家計簿のIDを入力し、「決定」ボタンを押した後<br>
 				修正してください</p>
-				<p id="errermessage" th:text="${errermessage}"></p>
+				<p class="err" id="errermessage" th:text="${errermessage}"></p>
 				<form th:action="@{/selectid?action=update}" method="post">
 					<table>
 						<tr>
@@ -71,7 +71,7 @@
 						<tr>
 							<th>収入</th>
 							<td>
-								<input id="income" type="number" name="income" min="0"> <!-- 入出金がnullのレコードは登録できないのでnyukin,syukkinがnullの場合は考慮せず -->
+								<input id="income" type="number" name="income" min="0">
 							</td>
 						</tr>
 						<tr>

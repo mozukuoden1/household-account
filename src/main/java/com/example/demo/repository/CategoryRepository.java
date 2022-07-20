@@ -7,5 +7,5 @@ import com.example.demo.entity.CategoryData;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<CategoryData, Integer> {
-	
+	public CategoryData findByCategoryId(int id);
 }
