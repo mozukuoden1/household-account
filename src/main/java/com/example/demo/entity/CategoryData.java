@@ -12,6 +12,11 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class CategoryData {
 	
@@ -19,8 +24,8 @@ public class CategoryData {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "category_id")
 	private int categoryId;
-	@Column
-	private String categoryname;
+	@Column(name = "category_name")
+	private String categoryName;
 	@JsonIgnore
 	@OneToMany(mappedBy = "categorydata", cascade = CascadeType.ALL)
 	List<HouseholdAccountData> householdAccountData;
@@ -28,28 +33,4 @@ public class CategoryData {
 	public CategoryData() {
 		
 	}
-	
-	public String getCategoryname() {
-		return categoryname;
-	}
-
-	public void setCategoryname(String categoryname) {
-		this.categoryname = categoryname;
-	}
-
-	public List<HouseholdAccountData> getHouseholdAccountData() {
-		return householdAccountData;
-	}
-
-	public void setHouseholdAccountData(List<HouseholdAccountData> householdAccountData) {
-		this.householdAccountData = householdAccountData;
-	}
-
-	public int getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-	
 }

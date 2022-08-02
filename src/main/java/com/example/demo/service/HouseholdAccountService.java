@@ -18,9 +18,9 @@ import com.example.demo.repository.HouseholdAccountRepository;
 public class HouseholdAccountService {
 
 	@Autowired
-	HouseholdAccountRepository repository;
+	private HouseholdAccountRepository repository;
 	@Autowired
-	CategoryRepository categoryReipository;
+	private CategoryRepository categoryReipository;
 	
 	public List<HouseholdAccountData> carrentDate() {
 		LocalDate localDate = LocalDate.now();
@@ -131,7 +131,7 @@ public class HouseholdAccountService {
 		repository.deleteById(data.getId());
 	}
 	
-	public CategoryData findByCategoryname(int id) {
+	public CategoryData findByCategoryName(int id) {
 		CategoryData result = categoryReipository.findByCategoryId(id);
 		
 		return result;

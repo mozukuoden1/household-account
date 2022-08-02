@@ -1,62 +1,200 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>家計管理プロジェクト</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta property='og:type' content='website'>
+  <meta property='og:title' content='WebデザイナーTARO YAMADA ポートフォリオ'>
+  <meta property='og:url' content='URLが入る'>
+  <meta property='og:description' content='TARO YAMADAのポートフォリオサイトです。'>
+  <meta property="og:image" content="img/ogp.png">
+  <meta name="description" content="TARO YAMADAのポートフォリオサイトです" />
+  <title>NAOKI KOBAYASHI ポートフォリオ</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+  <link href="css/ress.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="css/index_style.css" media="all" rel="stylesheet" type="text/css" />
+  <link rel="shortcut icon" href="img/favicon.ico" />
+  <link rel=”canonical” href=”URLが入る” />
 </head>
+
 <body>
+  <div class="wrapper">
 
-	<div id="wrapper">
-		<!-- ヘッダー -->
-		<header class="header">
-			<div>
-				<h1 class="logo"><a href="/index"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1>
-				<p>ログインユーザー</p>
-				<form th:action="@{/logout}" method="post"onSubmit="return logoutalert()">
-						<input class="logout" type="submit" value="ログアウト">
-				</form>
-			</div>
-		</header>
-		<!-- ヘッダーここまで -->
+    <!-- header -->
+    <header class="header ">
+      <div class="container">
+        <h1 class="header-logo">
+          <a href=".">NAOKI KOBAYASHI</a>
+        </h1>
+        <nav class="gnav">
+          <ul class="gnav-list">
+            <li class="gnav-item"><a href="#works">WORKS</a></li>
+            <li class="gnav-item"><a href="#skill">SKILL</a></li>
+            <li class="gnav-item"><a href="#about">ABOUT</a></li>
+            <li class="gnav-item"><a href="#contact">CONTACT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- /header -->
 
-			<!-- メイン -->
-			<main>
-				<div class="login">
-					<p th:if="${loginUserName == null}">ログインしてください</p>
-					<p th:if="${loginUserName}" th:text="'ようこそ' + ${loginUserName} + '様'"></p>
-					<div th:if="${param.error}">
-			            <p class="err">エラー：ログインに失敗しました</p>
-			            <div class="err" th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
-			                <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"></span>
-			            </div>
-			        </div>
-			        <div th:if="${param.logout}" th:text="${param.logout}">
-			            ログアウトしました
-			        </div>
-					<form th:action="@{/index}" method="post" th:if="${loginUserName == null}">
-						<table class="mb20">
-							<tr><th>ユーザー名　</th><td><input type="text" name="username" placeholder="Username"></td></tr>
-							<tr><th>パスワード　</th><td><input type="password" name="password" placeholder="Password"></td></tr>
-						</table>
-						<div class="center"><input type="submit" value="ログイン" class="btn"></div>
-					</form>
-				</div>
-				<div class="btn_area" th:if="${loginUserName != null}">
-					<a href="/main"><div class="page_btn">　メイン　 &#8811</div></a>
-				</div>
-				<a href="main">テストmain.html</a>
-				<a href="login">テストlogin.html</a>
-			</main>
-			<!-- メインここまで -->
+    <main class="content">
 
-		<!-- フッター -->
-		<footer class="footer">
-			<p>&copy;Copyright kakeibokanri project. All rights reserved.</p>
-		</footer>
-		<!-- フッターここまで -->
+      <!-- mv -->
+      <div class="mv">
+        <div class="mv-container">
+          <p class="mv-title">NAOKI KOBAYASHI</p>
+          <p class="mv-subtitle">PORTFOLIO</p>
+          <p class="mv-text">
+            実務未経験Javaプログラマー。<br class="sp-only">SpringFrameworkを使用した<br>
+            簡易的なアプリケーションを作成経験あり。<br class="sp-only"><br>
+          </p>
+        </div>
+      </div>
+      <!-- /mv -->
 
-	</div>
+      <!-- works -->
+      <section class="works section" id="works">
+        <div class="container">
+          <h2 class="title">WORKS</h2>
+          <div class="works-list">
+            <a class="works-item" href="/login">
+              <div class="works-img"><img src="img/works-sample-thumb.jpg" alt="" /></div>
+              <p class="works-name">家計簿アプリ</p>
+              <p class="works-info">Design / Coding(Responsive)</p>
+            </a>
+            <a class="works-item" href="works-template.html">
+              <div class="works-img"><img src="img/works-dummy-thumb.jpg" alt="" /></div>
+              <p class="works-name">作品名が入る</p>
+              <p class="works-info">Design / Coding(Responsive) / WordPress</p>
+            </a>
+            <a class="works-item" href="works-template.html">
+              <div class="works-img"><img src="img/works-dummy-thumb.jpg" alt="" /></div>
+              <p class="works-name">作品名が入る</p>
+              <p class="works-info">Design</p>
+            </a>
+            <a class="works-item" href="works-template.html">
+              <div class="works-img"><img src="img/works-dummy-thumb.jpg" alt="" /></div>
+              <p class="works-name">作品名が入る</p>
+              <p class="works-info">Banner Design</p>
+            </a>
+            <a class="works-item" href="works-template.html">
+              <div class="works-img"><img src="img/works-dummy-thumb.jpg" alt="" /></div>
+              <p class="works-name">作品名が入る</p>
+              <p class="works-info">Banner Design</p>
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- /works -->
+
+      <!-- skill -->
+      <section class="skill section" id="skill">
+        <div class="container">
+          <h2 class="title">SKILL</h2>
+          <div class="skill-list">
+            <div class="skill-item">
+              <p class="skill-img"><img src="img/social_html5_82.png" alt=""></p>
+              <div class="skill-body">
+                <h3 class="skill-name">HTML5/CSS3</h3>
+                <p class="skill-text">
+                  form作成できます。</p>
+              </div>
+            </div>
+            <div class="skill-item">
+              <p class="skill-img"><img src="img/java_original_wordmark_logo_icon_146459.png" alt=""></p>
+              <div class="skill-body">
+                <h3 class="skill-name">Java</h3>
+                <p class="skill-text">
+                  SpringFramework, SpringBoot,SpringSeculity ,JUnit </p>
+              </div>
+            </div>
+            <div class="skill-item">
+              <p class="skill-img"><img src="img/javascript_icon_130900.png" alt=""></p>
+              <div class="skill-body">
+                <h3 class="skill-name">JavaScript</h3>
+                <p class="skill-text">
+                  DOM操作、Ajax通信による値の受け渡し</p>
+              </div>
+            </div>
+            <div class="skill-item">
+              <p class="skill-img"><img src="img/github_git_icon_145985.png" alt=""></p>
+              <div class="skill-body">
+                <h3 class="skill-name">Git,GitHub</h3>
+                <p class="skill-text">
+                  GitHubへのアップロード、ブランチを使いバージョン管理</p>
+              </div>
+            </div>
+            <div class="skill-item">
+              <p class="skill-img"><img src="img/aws_icon_146074.png" alt=""></p>
+              <div class="skill-body">
+                <h3 class="skill-name">AWS</h3>
+                <p class="skill-text">
+                  環境構築をしアプリケーションをデプロイ</p>
+              </div>
+            </div>
+            <div class="skill-item">
+              <p class="skill-img"><img src="img/sql-document-outlined-interface-symbol_icon-icons.com_57504.png" alt=""></p>
+              <div class="skill-body">
+                <h3 class="skill-name">SQL</h3>
+                <p class="skill-text">
+                  MySQLを使用、集計関数、結合</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /skill -->
+
+      <!-- about -->
+      <section class="about section" id="about">
+        <div class="container">
+          <h2 class="title">ABOUT</h2>
+          <div class="profile">
+            <p class="profile-img">
+              <img src="img/profile.jpg" alt="">
+            </p>
+            <div class="profile-body">
+              <p>
+                職業訓練で5か月間Javaプログラミング、SQL、サーブレットを勉強し、その後SpringFrameworkを独学で勉強中。
+              </p>
+              <p>
+                
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /about -->
+
+      <!-- contact -->
+      <section class="contact section" id="contact">
+        <div class="container">
+          <h2 class="title">CONTACT</h2>
+          <p class="lead">
+            お問い合わせは、<br class="sp-only">メールにてお願いいたします。
+          </p>
+          <div class="contact-list">
+            <span class="contact-item">zhihuixiaolin7@gmail.com</span>
+          </div>
+        </div>
+      </section>
+      <!-- /contact -->
+      <div class="page-top" id="js-page-top">
+        <span class="material-icons-outlined">expand_less</span>
+      </div>
+    </main>
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="copyright">&copy;NAOKI KOBAYASHI</div>
+    </footer>
+    <!-- /footer -->
+
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type='text/javascript' src="js/index_script.js"></script>
 </body>
 </html>

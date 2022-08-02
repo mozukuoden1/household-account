@@ -1,29 +1,40 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>家計管理プロジェクト</title>
-		<link rel="stylesheet" href="css/style.css">
-	</head>
-	<body>
-		<div id="wrapper">
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>家計管理プロジェクト</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+	<div id="wrapper">
 		<!-- ヘッダー -->
-			<header class="header">
-				<div><h1 class="logo"><a href="/index"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1></div>
-			</header>
-			<!-- ヘッダーここまで -->
-			
+		<header class="header">
+			<div>
+				<h1 class="logo"><a href="/index"><img src="img/kakeikanri_project.png" alt="家計管理プロジェクト" width="230px"></a></h1>
+				<form th:action="@{/logout}" method="post"onSubmit="return logoutalert()">
+						<input class="logout" type="submit" value="ログアウト">
+				</form>
+			</div>
+		</header>
+		<!-- ヘッダーここまで -->
+
 			<!-- メイン -->
 			<main>
 				<div class="login">
 					<p th:if="${loginUserName == null}">ログインしてください</p>
-					<p th:if="${loginUserName}" th:text="ようこそ${loginUserName}"></p>
+					<p th:if="${loginUserName}" th:text="'ようこそ' + ${loginUserName} + '様'"></p>
 					<div th:if="${param.error}">
-						入力されたユーザー名、又はパスワードが違います。</div>
-					<div th:if="${param.logout}">
-						ログアウトしました。</div>
-					<form th:action="@{/login}" method="post">
+			            <p class="err">エラー：ログインに失敗しました</p>
+			            <div class="err" th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
+			                <span th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}"></span>
+			            </div>
+			        </div>
+			        <div th:if="${param.logout}" th:text="ログアウトしました">
+			            ログアウトしました
+			        </div>
+					<form th:action="@{/login}" method="post" th:if="${loginUserName == null}">
 						<table class="mb20">
 							<tr><th>ユーザー名　</th><td><input type="text" name="username" placeholder="Username"></td></tr>
 							<tr><th>パスワード　</th><td><input type="password" name="password" placeholder="Password"></td></tr>
@@ -31,13 +42,18 @@
 						<div class="center"><input type="submit" value="ログイン" class="btn"></div>
 					</form>
 				</div>
+				<div class="btn_area" th:if="${loginUserName != null}">
+					<a href="/main"><div class="page_btn">　メイン　 &#8811</div></a>
+				</div>
 			</main>
 			<!-- メインここまで -->
-			<!-- フッター -->
-			<footer class="footer">
-				<p>&copy;Copyright kakeibokanri project. All rights reserved.</p>
-			</footer>
-			<!-- フッターここまで -->
-		</div>
-	</body>
+
+		<!-- フッター -->
+		<footer class="footer">
+			<p>&copy;Copyright kakeibokanri project. All rights reserved.</p>
+		</footer>
+		<!-- フッターここまで -->
+
+	</div>
+</body>
 </html>

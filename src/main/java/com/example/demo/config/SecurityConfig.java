@@ -41,15 +41,14 @@ public class SecurityConfig implements  WebMvcConfigurer {
 		 System.out.println("チェーンにいる");
 		 http.formLogin(login -> login
 				 .loginPage("/index") .permitAll()
-				 .loginProcessingUrl("/index")
-				 .defaultSuccessUrl("/index", true)//trueがないとcssなど静的コンテンツに遷移する
-				 .failureUrl("/index?error")
-				 .permitAll()
+				 .loginProcessingUrl("/login")
+				 .defaultSuccessUrl("/login", true)//trueがないとcssなど静的コンテンツに遷移する
+				 .failureUrl("/login?error")
 			).logout(logout -> logout
-				.logoutSuccessUrl("/index?logout").permitAll()
+				.logoutSuccessUrl("/login?logout").permitAll()
 			).authorizeHttpRequests(authz -> authz
-				.antMatchers("/css/**", "/js/**", "/h2-console/**").permitAll()
-				.mvcMatchers("/index").permitAll()
+				.antMatchers("/img/**", "/css/**", "/js/**", "/h2-console/**").permitAll()
+				.mvcMatchers("/index", "/login").permitAll()
 				.mvcMatchers("/main", "/regist", "/update", "/delete").hasRole("USER")
 				.mvcMatchers("/admin").hasRole("ADMIN")
 				.anyRequest()

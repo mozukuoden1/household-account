@@ -12,9 +12,10 @@ import com.example.demo.repository.UserRepository;
 public class UserService {
 
 	@Autowired
-	UserRepository repository;
+	private UserRepository repository;
 	@Autowired
-	AuthoritiesRepository authoritiesRepository;
+	private AuthoritiesRepository authoritiesRepository;
+	
 	public void saveAndFlush(UserData user) {
 		repository.saveAndFlush(user);
 	}

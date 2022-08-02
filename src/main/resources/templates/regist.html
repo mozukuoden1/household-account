@@ -81,10 +81,6 @@
 					</div>
 				</form>
 			</div>
-			<form action="/test" method="POST">
-				<input type="text" name="test">
-				<input type="submit" value="決定">
-			</form>
 				<table class="kakei_t">
 
 					<tr>
@@ -99,7 +95,7 @@
 					<tr th:if="${registdata} != null" th:object="${registdata}">
 						<td th:text="*{id}">2022-04-21</td>
 						<td th:text="*{date}">2022-04-21</td>
-						<td th:text="${registCategoryname}">住宅費</td>
+						<td th:text="${registCategoryName}">住宅費</td>
 						<td th:text="*{memo}">4月の住宅費</td>
 						<td th:text="*{income}">0</td>
 						<td th:text="*{expense}">100,000</td>

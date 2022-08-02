@@ -82,11 +82,11 @@ public class HouseholdAccountController {
 	public ModelAndView regist(@ModelAttribute() HouseholdAccountData data, ModelAndView mav) {
 		service.saveAndFlush(data);
 		Optional<HouseholdAccountData> result = service.findById(data);
-		CategoryData cate = service.findByCategoryname(data.getCategoryId());
+		CategoryData cate = service.findByCategoryName(data.getCategoryId());
 		System.out.println("regist:post");
 		
 		mav.addObject("registdata", result.get());
-		mav.addObject("registCategoryname", cate.getCategoryname());
+		mav.addObject("registCategoryName", cate.getCategoryName());
 		mav.setViewName("regist");
 		return mav;
 	}

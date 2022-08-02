@@ -192,10 +192,13 @@ footer p {
 	max-width: 550px;
 }
 
-/* --- index.jsp --- */
+/* --- index.html --- */
 .login {
 	width:300px;
 	margin: 0 auto;
+}
+.login p {
+	text-align:center;
 }
 input[type="password" i] {
     -webkit-text-security: disc !important;
@@ -207,7 +210,7 @@ input[type="password" i] {
     font-size: 14px;
 }
 
-/* --- Main.jsp --- */
+/* --- main.html --- */
 /* 家計簿テーブル */
 .kakei_t, .kakei_t th, .kakei_t td {
 	border-collapse: collapse;
@@ -252,7 +255,7 @@ input[type="password" i] {
 #wrapper .kakei_t td:nth-child(6):before {
 	content: "-";
 }
-/* （Regist.jspのテーブル） */
+/* （regist.htmlのテーブル） */
 #wrapper .kakei_touroku + .kakei_t td:nth-child(5) {
 	color: green;
 }
@@ -300,7 +303,7 @@ input[type="password" i] {
 }
 
 
-/* --- Regist.jsp --- */
+/* --- regist.html --- */
 /* 登録テーブル */
 .kakei_touroku {
 	width: 500px;
@@ -363,7 +366,7 @@ select#kikan_tsuki,/* Main.jsp */
 }
 
 
-/* --- index.jsp --- */
+/* --- index.html --- */
 .login th {
 	font-weight: normal;
 	text-align: left;
@@ -449,7 +452,7 @@ select#kikan_tsuki,/* Main.jsp */
 		padding: 10px 20px 0;
 	}
 
-	/* Main.jsp */
+	/* main.html */
 	.page_btn {
 		margin: 0 auto 20px;
 	}
@@ -503,7 +506,7 @@ select#kikan_tsuki,/* Main.jsp */
 		float: right;
 	}
 
-	/* Regist.jsp table(idがないのでズレ修正) */
+	/* regist.html table(idがないのでズレ修正) */
 	#wrapper .kakei_touroku + .kakei_t{
 
 	}

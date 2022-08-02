@@ -17,9 +17,11 @@ public class LoginController {
 	UserService service;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView loginpage(ModelAndView mav) {
+	public ModelAndView loginpage(@AuthenticationPrincipal UserDetails user, ModelAndView mav) {
 		mav.setViewName("login");
-		
+		if(user != null) {
+			mav.addObject("loginUserName", user.getUsername());
+		}
 		System.out.println("loginpage");
 		return mav;
 	}
@@ -32,11 +34,8 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/index")
-	public ModelAndView index(@AuthenticationPrincipal UserDetails user, ModelAndView mav) {
+	public ModelAndView index(ModelAndView mav) {
 		mav.setViewName("index");
-		if(user != null) {
-		mav.addObject("loginUserName", user.getUsername());
-		}
 		System.out.println("index");
 		return mav;
 	}
