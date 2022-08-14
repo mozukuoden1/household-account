@@ -40,7 +40,18 @@ public class LoginController {
 		return mav;
 	}
 	
-	/*@RequestMapping("/")
+	@RequestMapping("/")
+	public ModelAndView index2(ModelAndView mav) {
+		mav.setViewName("index");
+		System.out.println("index");
+		return mav;
+	}
+	
+	/*@RequestMapping("/github_redirect")
+	public String github_redirect(ModelAndView mav) {
+		return "redirect:https://github.com/mozukuoden1/Practice2";
+	}*/
+ 	/*@RequestMapping("/")
 	public ModelAndView defoult(ModelAndView mav) {
 		mav.setViewName("index");
 		

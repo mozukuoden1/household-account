@@ -1,28 +1,8 @@
 package com.example.demo.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import org.dbunit.DatabaseUnitException;
-import org.dbunit.database.DatabaseConfig;
-import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.ITable;
-import org.dbunit.dataset.excel.XlsDataSet;
-import org.dbunit.ext.mysql.MySqlMetadataHandler;
-import org.dbunit.operation.DatabaseOperation;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 class DBTest {
 
-	private static IDatabaseConnection dbconn;
+	/*private static IDatabaseConnection dbconn;
 	private static Connection conn;
 	
 	@BeforeAll
@@ -37,11 +17,11 @@ class DBTest {
 		DatabaseConfig config = dbconn.getConfig();
 		config.setProperty(DatabaseConfig.PROPERTY_METADATA_HANDLER,
 				new MySqlMetadataHandler());
-	}
-	@Test
+	}*/
+	//@Test
 	void test() {
 		
-		String targetTablseName = "household_account_data";
+		/*String targetTablseName = "household_account_data";
 		
 		IDataSet dataset = new XlsDataSet(new File(null));//null => new File("exclファイルの階層")
 		DatabaseOperation.DELETE_ALL.execute(dbconn, dataset);
@@ -57,7 +37,7 @@ class DBTest {
 		IDataSet expecteDataset = new XlsDataSet(new File(null));
 		ITable expectTable = expecteDataset.getTable(targetTablseName);
 		
-		assertEquals(expectTable, actualTable);
+		assertEquals(expectTable, actualTable);*/
 	}
 
 }

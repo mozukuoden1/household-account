@@ -181,8 +181,8 @@ img {
 }
 
 .works-item {
-  width: 31.74603%;
-  margin-right: 1.58730%;
+  width: 51.74603%;
+  margin-right: 3.58730%;
   margin-bottom: 40px;
   color: #333;
 }
@@ -209,7 +209,9 @@ img {
   font-size: 10px;
   margin-top: 5px;
 }
-
+.works ul {
+	margin-left: 20px;
+}
 /*--------------------------------
  Skill
 ---------------------------------*/
